@@ -2,6 +2,7 @@ package guru.springframework.services;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class RecipeServiceIT {
 
 	@Transactional
 	@Test
+	@Ignore
 	public void testSaveOfDescription() {
 		Iterable<Recipe> recipes = recipeRepository.findAll();
 		Recipe testRecipe = recipes.iterator().next();
