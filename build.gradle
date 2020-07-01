@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'jacoco'
+	id 'eclipse'
 }
 
 group = 'guru.springframework'
@@ -27,11 +28,18 @@ dependencies {
 	compile 'org.webjars:bootstrap:3.3.7-1'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'junit:junit:4.13'
+	compile 'javax.validation:validation-api'
+	compile 'com.google.code.findbugs:jsr305:3.0.2'
+	compile 'org.hibernate:hibernate-validator:6.1.5.Final'
+	
 }
 
 test {
-	useJUnitPlatform()
+    useJUnit()
+
+    maxHeapSize = '1G'
 }
 
 jacocoTestReport {

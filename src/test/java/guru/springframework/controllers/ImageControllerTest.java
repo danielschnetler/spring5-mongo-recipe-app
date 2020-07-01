@@ -1,7 +1,7 @@
 package guru.springframework.controllers;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
@@ -106,7 +105,7 @@ public class ImageControllerTest {
 	}
 
 	@Test
-	public void testGetImageNumberFOrmatException() throws Exception {
+	public void testGetImageNumberFormatException() throws Exception {
 		mockMvc.perform(get("/recipe/asdf/recipeimage")).andExpect(status().isBadRequest())
 				.andExpect(view().name("400error"));
 	}
