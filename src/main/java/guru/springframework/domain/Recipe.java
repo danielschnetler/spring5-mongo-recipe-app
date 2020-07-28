@@ -3,11 +3,15 @@ package guru.springframework.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Document
 public class Recipe {
 
 	private String id;
@@ -22,10 +26,12 @@ public class Recipe {
 	private Set<Ingredient> ingredients = new HashSet<>();
 	private Byte[] image;
 	private Notes notes;
+	
+	@DBRef
 	private Set<Category> categories = new HashSet<>();
 
 	public Recipe addIngredient(Ingredient ingredient) {
-		ingredient.setRecipe(this);
+		//ingredient.setRecipe(this);
 		this.ingredients.add(ingredient);
 		return this;
 	}
@@ -33,7 +39,7 @@ public class Recipe {
 	public void setNotes(Notes notes) {
 		if (notes != null) {
 			this.notes = notes;
-			notes.setRecipe(this);
+			//notes.setRecipe(this);
 		}
 	}
 }

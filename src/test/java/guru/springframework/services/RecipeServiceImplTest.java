@@ -62,15 +62,17 @@ public class RecipeServiceImplTest {
 		Optional<Recipe> recipeOptional = Optional.empty();
 		
 		when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
-		
-		Recipe recipeReturned = recipeService.findById("1");
+		Recipe recipeReturned =  recipeService.findById("1");
+
+		//Then
+		assertNull(recipeReturned);
 	}
 
 	@Test
 	public void testGetRecipes() {
 
 		Recipe recipe = new Recipe();
-		HashSet recipesData = new HashSet();
+		HashSet<Recipe> recipesData = new HashSet<Recipe>();
 		recipesData.add(recipe);
 
 		when(recipeRepository.findAll()).thenReturn(recipesData);
