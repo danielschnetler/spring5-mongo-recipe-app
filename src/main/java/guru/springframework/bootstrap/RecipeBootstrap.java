@@ -42,8 +42,64 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	@Override
 	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		loadCategories();
+		loadUOM();
 		recipeRepository.saveAll(getRecipes());
 		log.debug("loading bootstrap data");
+		
+	}
+
+	private void loadUOM() {
+		UnitOfMeasure uom1 = new UnitOfMeasure();
+        uom1.setUom("Teaspoon");
+        uomRepository.save(uom1);
+
+        UnitOfMeasure uom2 = new UnitOfMeasure();
+        uom2.setUom("Tablespoon");
+        uomRepository.save(uom2);
+
+        UnitOfMeasure uom3 = new UnitOfMeasure();
+        uom3.setUom("Cup");
+        uomRepository.save(uom3);
+
+        UnitOfMeasure uom4 = new UnitOfMeasure();
+        uom4.setUom("Pinch");
+        uomRepository.save(uom4);
+
+        UnitOfMeasure uom5 = new UnitOfMeasure();
+        uom5.setUom("Ounce");
+        uomRepository.save(uom5);
+
+        UnitOfMeasure uom6 = new UnitOfMeasure();
+        uom6.setUom("Each");
+        uomRepository.save(uom6);
+
+        UnitOfMeasure uom7 = new UnitOfMeasure();
+        uom7.setUom("Pint");
+        uomRepository.save(uom7);
+
+        UnitOfMeasure uom8 = new UnitOfMeasure();
+        uom8.setUom("Dash");
+        uomRepository.save(uom8);
+		
+	}
+
+	private void loadCategories() {
+        Category cat1 = new Category();
+        cat1.setDescription("American");
+        categoryRepository.save(cat1);
+
+        Category cat2 = new Category();
+        cat2.setDescription("Italian");
+        categoryRepository.save(cat2);
+
+        Category cat3 = new Category();
+        cat3.setDescription("Mexican");
+        categoryRepository.save(cat3);
+
+        Category cat4 = new Category();
+        cat4.setDescription("Fast Food");
+        categoryRepository.save(cat4);
 		
 	}
 
