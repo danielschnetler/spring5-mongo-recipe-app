@@ -8,6 +8,7 @@ import guru.springframework.domain.UnitOfMeasure;
 
 public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, String> {
 	
-	Optional<UnitOfMeasure> findByUom(String uom);
+	Optional<UnitOfMeasure> findById(String id);
+	Optional<UnitOfMeasure> findByDescription(String description);
 
 }

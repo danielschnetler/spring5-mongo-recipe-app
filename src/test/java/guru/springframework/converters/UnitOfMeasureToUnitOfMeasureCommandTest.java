@@ -35,7 +35,7 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
 		//Given
 		UnitOfMeasure uom = new UnitOfMeasure();
 		uom.setId(ID_VALUE);
-		uom.setUom(DESCRIPTION);
+		uom.setDescription(DESCRIPTION);
 		
 		//When
 		UnitOfMeasureCommand command = converter.convert(uom);
