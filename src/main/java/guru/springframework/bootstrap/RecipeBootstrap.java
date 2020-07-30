@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,35 +50,35 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
 	private void loadUOM() {
 		UnitOfMeasure uom1 = new UnitOfMeasure();
-        uom1.setUom("Teaspoon");
+        uom1.setDescription("Teaspoon");
         uomRepository.save(uom1);
 
         UnitOfMeasure uom2 = new UnitOfMeasure();
-        uom2.setUom("Tablespoon");
+        uom2.setDescription("Tablespoon");
         uomRepository.save(uom2);
 
         UnitOfMeasure uom3 = new UnitOfMeasure();
-        uom3.setUom("Cup");
+        uom3.setDescription("Cup");
         uomRepository.save(uom3);
 
         UnitOfMeasure uom4 = new UnitOfMeasure();
-        uom4.setUom("Pinch");
+        uom4.setDescription("Pinch");
         uomRepository.save(uom4);
 
         UnitOfMeasure uom5 = new UnitOfMeasure();
-        uom5.setUom("Ounce");
+        uom5.setDescription("Ounce");
         uomRepository.save(uom5);
 
         UnitOfMeasure uom6 = new UnitOfMeasure();
-        uom6.setUom("Each");
+        uom6.setDescription("Each");
         uomRepository.save(uom6);
 
         UnitOfMeasure uom7 = new UnitOfMeasure();
-        uom7.setUom("Pint");
+        uom7.setDescription("Pint");
         uomRepository.save(uom7);
 
         UnitOfMeasure uom8 = new UnitOfMeasure();
-        uom8.setUom("Dash");
+        uom8.setDescription("Dash");
         uomRepository.save(uom8);
 		
 	}
@@ -106,44 +105,44 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	private List<Recipe> getRecipes() {
 		List<Recipe> recipies = new ArrayList<>(2);
 
-		Optional<UnitOfMeasure> eachUomOptional = uomRepository.findByUom("Each");
+		Optional<UnitOfMeasure> eachUomOptional = uomRepository.findByDescription("Each");
 
 		if (!eachUomOptional.isPresent()) {
 			throw new RuntimeException("Each UOM not found");
 		}
 
-		Optional<UnitOfMeasure> teaspoonUomOptional = uomRepository.findByUom("Teaspoon");
+		Optional<UnitOfMeasure> teaspoonUomOptional = uomRepository.findByDescription("Teaspoon");
 
 		if (!teaspoonUomOptional.isPresent()) {
 			throw new RuntimeException("Teaspoon UOM not found");
 		}
 
-		Optional<UnitOfMeasure> tablespoonUomOptional = uomRepository.findByUom("Tablespoon");
+		Optional<UnitOfMeasure> tablespoonUomOptional = uomRepository.findByDescription("Tablespoon");
 
 		if (!tablespoonUomOptional.isPresent()) {
 			throw new RuntimeException("Tablespoon UOM not found");
 		}
-		Optional<UnitOfMeasure> cupUomOptional = uomRepository.findByUom("Cup");
+		Optional<UnitOfMeasure> cupUomOptional = uomRepository.findByDescription("Cup");
 
 		if (!cupUomOptional.isPresent()) {
 			throw new RuntimeException("Cup UOM not found");
 		}
-		Optional<UnitOfMeasure> pinchUomOptional = uomRepository.findByUom("Pinch");
+		Optional<UnitOfMeasure> pinchUomOptional = uomRepository.findByDescription("Pinch");
 
 		if (!pinchUomOptional.isPresent()) {
 			throw new RuntimeException("Pinch UOM not found");
 		}
-		Optional<UnitOfMeasure> ounceUomOptional = uomRepository.findByUom("Ounce");
+		Optional<UnitOfMeasure> ounceUomOptional = uomRepository.findByDescription("Ounce");
 
 		if (!ounceUomOptional.isPresent()) {
 			throw new RuntimeException("Ounce UOM not found");
 		}
-		Optional<UnitOfMeasure> dashUomOptional = uomRepository.findByUom("Dash");
+		Optional<UnitOfMeasure> dashUomOptional = uomRepository.findByDescription("Dash");
 
 		if (!dashUomOptional.isPresent()) {
 			throw new RuntimeException("Dash UOM not found");
 		}
-		Optional<UnitOfMeasure> pintUomOptional = uomRepository.findByUom("Pint");
+		Optional<UnitOfMeasure> pintUomOptional = uomRepository.findByDescription("Pint");
 
 		if (!pintUomOptional.isPresent()) {
 			throw new RuntimeException("Pint UOM not found");
@@ -217,13 +216,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		guacamoleRecipe.setNotes(guacamoleNotes);
 		
 		guacamoleRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
-		guacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(0.5), teaspoonUom));
+		guacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal("0.5"), teaspoonUom));
 		guacamoleRecipe.addIngredient(new Ingredient("Fresh Lime or Lemon juice", new BigDecimal(1), tablespoonUom));
 		guacamoleRecipe.addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tablespoonUom));
 		guacamoleRecipe.addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom));
 		guacamoleRecipe.addIngredient(new Ingredient("cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoonUom));
 		guacamoleRecipe.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(1), dashUom));
-		guacamoleRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(0.5), eachUom));
+		guacamoleRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal("0.5"), eachUom));
 		
 		guacamoleRecipe.getCategories().add(americanCategory);
 		guacamoleRecipe.getCategories().add(mexicanCategory);
@@ -258,8 +257,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\n" +
                 "\n" +
                 "\n" +
-                "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
-        tacoNotes.setRecipe(tacosRecipe);
+				"Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
+		tacosRecipe.setNotes(tacoNotes);
 
         tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tablespoonUom));
         tacosRecipe.addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teaspoonUom));

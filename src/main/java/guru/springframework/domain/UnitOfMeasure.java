@@ -13,6 +13,6 @@ public class UnitOfMeasure {
 	
 	@Id
 	private String id;	
-	private String uom;
+	private String description;
 
 }
