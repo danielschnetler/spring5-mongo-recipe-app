@@ -45,19 +45,23 @@ public class IngredientServiceImpl implements IngredientService {
 
 		Recipe recipe = recipeOptional.get();
 
-		Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
+			Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
 				.filter(ingredient -> ingredient.getId().equals(ingredientId))
 				.map(ingredient -> ingredientToIngredientCommand.convert(ingredient)).findAny();
 
 		if (!ingredientCommandOptional.isPresent()) {
 			throw new RuntimeException("Ingredient " + ingredientId + " does not exist for recipe " + recipeId);
 		}
-
-		return ingredientCommandOptional.get();
+		
+		IngredientCommand ingredientCommand = ingredientCommandOptional.get();
+		ingredientCommand.setRecipeId(recipeId);
+		
+		return ingredientCommand;
 	}
 
 	@Override
 	public IngredientCommand saveIngredientCommand(IngredientCommand command) {
+
 		Optional<Recipe> recipeOptional = recipeRepository.findById(command.getRecipeId());
 
 		if (!recipeOptional.isPresent()) {
@@ -96,8 +100,9 @@ public class IngredientServiceImpl implements IngredientService {
 					.filter(recipeIngredients -> recipeIngredients.getUom().getId().equals(command.getUom().getId()))
 					.findFirst();
 		}
-		
-		return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+		IngredientCommand ingredientCommand = ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+		ingredientCommand.setRecipeId(recipe.getId());
+		return ingredientCommand;
 	}
 
 	@Override
